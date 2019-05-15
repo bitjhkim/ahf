@@ -1,18 +1,22 @@
 import React from 'react';
-import styles from './PageTemplate.scss';
+// import styles from './PageTemplate.scss';
 import classNames from 'classnames/bind';
 import Header from 'components/common/Header';
-import Footer from 'components/common/Footer';
+import Nav from 'components/common/Nav';
 
-const cx = classNames.bind(styles);
+// const cx = classNames.bind(styles);
 
 const PageTemplate = ({children}) => (
-  <div className={cx('page-template')}>
+  <div>
     <Header/>
-    <main>
-      {children}
-    </main>
-    <Footer/>
+    <div className="container-fluid">
+      <div className="row">
+        <Nav/>
+        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+        {children}
+        </main>
+      </div>
+    </div>
   </div>
 );
 

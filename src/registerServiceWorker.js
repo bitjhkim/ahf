@@ -49,6 +49,8 @@ export default function register() {
         registerValidSW(swUrl);
       }
     });
+  } else { // 이곳! (else문 추가)
+    console.log("won't register serviceWorker. Current env:", process.env.NODE_ENV);
   }
 }
 
@@ -56,6 +58,7 @@ function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      console.log('serviceWorker is registered'); // 이곳!
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {

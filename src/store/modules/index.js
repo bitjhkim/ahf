@@ -1,6 +1,4 @@
 export { default as connection } from './connection';
-// export { default as editor } from './editor';
-// export { default as list } from './list';
-// export { default as post } from './post';
-// export { default as base } from './base';
+export { default as schema } from './schema';
+export { default as model } from './model';
 export { penderReducer as pender } from 'redux-pender';

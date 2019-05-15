@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import classNameNames from 'classNamenames/bind';
 
 
-class ConnectnionList extends Component {
+class ModelManager extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // return this.props.todos !== nextProps.todos;
   }  
@@ -17,7 +17,7 @@ class ConnectnionList extends Component {
               <h4 className="my-0 font-weight-normal">Free</h4>
             </div>
             <div className="card-body">
-              <h1 className="card-title pricing-card-title">{connection.get('ip')}</h1>
+              <h1 className="card-title pricing-card-title">{connection.get('type')}</h1>
               <ul className="list-unstyled mt-3 mb-4">
                 <li>10 users included</li>
                 <li>2 GB of storage</li>
@@ -69,4 +69,4 @@ class ConnectnionList extends Component {
   }
 }
 
-export default ConnectnionList;
+export default ModelManager;

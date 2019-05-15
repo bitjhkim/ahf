@@ -1,22 +1,19 @@
 import React from 'react';
-import styles from './Header.scss';
+// import styles from './Header.scss';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import Button from 'components/common/Button';
 
-const cx = classNames.bind(styles);
+// const cx = classNames.bind(styles);
 
 const Header = () => (
-  <header className={cx('header')}>
-    <div className={cx('header-content')}>
-      <div className={cx('brand')}>
-        <Link to="/">reactblog</Link>
-      </div>
-      <div className={cx('right')}>
-        <Button theme="outline" to="/editor">새 포스트</Button>
-      </div>
-    </div>
-  </header>
+  <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Agens Hub</a>
+    <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" />
+    <ul className="navbar-nav px-3">
+        <li className="nav-item text-nowrap">
+        <a className="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+  </nav>
 );
 
 export default Header;
