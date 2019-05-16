@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-// import classNameNames from 'classNamenames/bind';
+import { Button } from 'reactstrap';
 
 
 class ConnectnionList extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    // return this.props.todos !== nextProps.todos;
-  }  
+  constructor (props) {
+    super(props);
+
+    this.state = { cSelected: [] };
+
+    this.onBtnClick = this.onRadioBtnClick.bind(this);
+  }
+
+  onRadioBtnClick(rSelected) {
+    const {onShowModal } = this.props;
+    console.log('>>>>>>', rSelected);
+    // this.setState({ rSelected });
+    onShowModal;
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // return this.props.todos !== nextProps.todos;
+  // }  
 
   render() {
-    const { list } = this.props;
+    const { list, onShowModal } = this.props;
+    console.log('>>>>', list);
     const connectionList = list.map(
       connection => (
         <div className="card-deck mb-3 text-center">
@@ -65,6 +81,9 @@ class ConnectnionList extends Component {
       <div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Connection</h1>
+        </div>
+        <div>
+        <Button color="primary" onClick={onShowModal}>primary</Button>{' '}
         </div>
         {connectionList}
       </div>

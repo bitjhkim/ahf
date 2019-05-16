@@ -11,8 +11,8 @@ const PageTemplate = ({children}) => (
     <Header/>
     <div className="container-fluid">
       <div className="row">
-        <Nav/>
-        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+        {/* <Nav/> */}
+        <main role="main" className="col-md-12 ml-sm-auto col-lg-12 px-4">
         {children}
         </main>
       </div>
