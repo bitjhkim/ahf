@@ -18,6 +18,7 @@ class ConnectionContainer extends Component {
   }
 
   componentDidMount() {
+    console.log('!!!!!!');
     this.getConnectionList();
   }
 
@@ -39,7 +40,9 @@ class ConnectionContainer extends Component {
 
   render() {
     const { handleShowModal } = this;
-    const { list } = this.props;
+    const { list, loading } = this.props;
+
+    if(loading) return null; // 로딩 중에는 아무것도 보여주지 않습니다.
 
     return (
       <Connection list={list} onShowModal={handleShowModal}/>
@@ -49,7 +52,8 @@ class ConnectionContainer extends Component {
 
 export default connect(
   (state) => ({
-    list: state.connection,
+    list: state.connection.list,
+    loading: state.pender.pending['connection/GET_CONNECTION_LIST']
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

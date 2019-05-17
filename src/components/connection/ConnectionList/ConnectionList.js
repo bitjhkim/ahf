@@ -24,7 +24,7 @@ class ConnectnionList extends Component {
 
   render() {
     const { list, onShowModal } = this.props;
-    console.log('>>>>', list);
+    // console.log('>>>>', list);
     const connectionList = list.map(
       connection => (
         <div className="card-deck mb-3 text-center">

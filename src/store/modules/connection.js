@@ -12,25 +12,6 @@ const GET_CONNECTION_LIST = 'connection/GET_CONNECTION_LIST';
 export const getConnectionList = createAction(GET_CONNECTION_LIST, api.getConnectionList);
 
 // initial state
-// const initialState = List([
-//     Map({
-//         id: 1,
-//         ip: '127.0.0.1',
-//         schema: 'test',
-//         name: 'aaa',
-//         password: 'bbb',
-//         use: true
-//     }),
-//     Map({
-//         id: 2,
-//         ip: '127.0.0.2',
-//         schema: 'dump',
-//         name: 'aaa',
-//         password: 'bbb',
-//         use: true
-//     })
-//   ]);
-
 const initialState = Map({
     list: List()
 });
@@ -40,7 +21,9 @@ export default handleActions({
     ...pender({
         type: GET_CONNECTION_LIST,
         onSuccess: (state, action) => {
+            console.log('>>>>>>', state, action);
             const { data: list } = action.payload;
+            // console.log('>>>>>>', list);
             return state.set('list', fromJS(list));
         }
       })
