@@ -21,10 +21,15 @@ export default handleActions({
     ...pender({
         type: GET_CONNECTION_LIST,
         onSuccess: (state, action) => {
-            console.log('>>>>>>', state, action);
             const { data: list } = action.payload;
-            // console.log('>>>>>>', list);
+            if ( list ) {
+                const newobj = Object.keys(list[0]).reduce((aac, cur) => {
+                    aac[cur] = undefined;
+                    return aac
+                  }, {});
+                  list.push(newobj);
+            }
             return state.set('list', fromJS(list));
         }
-      })
+    })
 }, initialState);

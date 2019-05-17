@@ -1,19 +1,56 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input  } from 'reactstrap';
 
 class ConnectnionModal extends Component {
   
+  handleChange = (e) => {
+    const { onChangeInput } = this.props;
+    const { value, name } = e.target;
+    onChangeInput({name, value});
+  }
 
   render() {
 
-    const { visible, onConfirm, onCancel } = this.props;
+    const { handleChange } = this;
+    const { visible, ip, schema, description, onConfirm, onCancel } = this.props;
 
     return (
       <div>
         <Modal isOpen={visible}>
-          <ModalHeader>Modal title</ModalHeader>
+          <ModalHeader>Connection Modal</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <FormGroup>
+              <Label for="connectionIp">IP</Label>
+              <Input
+                type="text"
+                name="ip"
+                id="connectionIp"
+                value={ip}
+                placeholder="127.0.0.1"
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="connectionSchema">Schema</Label>
+              <Input
+                type="text"
+                name="schema"
+                id="connectionSchema"
+                value={schema}
+                placeholder="Schema name"
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="connectionDescription">Description</Label>
+              <Input 
+                type="textarea" 
+                name="description"
+                id="connectionDescription"  
+                value={description} 
+                onChange={handleChange}
+              />
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={onConfirm}>Do Something</Button>{' '}
