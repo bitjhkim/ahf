@@ -1,16 +1,11 @@
 import React from 'react';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink 
+} from 'reactstrap';
 
 // const Header = () => (
 //   <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">

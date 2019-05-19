@@ -31,25 +31,26 @@ class ConnectionContainer extends Component {
     ConnectionActions.getConnectionList();
   }
 
-  handleSetConnectionId = (id) => {
-    const { ConnectionModalActions } = this.props;
-    const name = 'id';
-    console.log(id);
-    ConnectionModalActions.changeInput({name, id});
-  }
+  // handleSetConnectionId = (value) => {
+  //   const { ConnectionModalActions } = this.props;
+  //   const name = 'id';
+  //   ConnectionModalActions.changeInput({name, value});
+  // }
 
-  handleShowModal = () => {
+  handleShowModal = (value) => {
     const { ConnectionModalActions } = this.props;
-    ConnectionModalActions.showModal();
+    ConnectionModalActions.showModal(value);
   }
 
   render() {
-    const { handleSetConnectionId, handleShowModal } = this;
+    // const { handleSetConnectionId, handleShowModal } = this;
+    const { handleShowModal } = this;
     const { list, loading } = this.props;
 
     if(loading || loading === undefined) return null; // 로딩 중에는 아무것도 보여주지 않습니다.
     return (
-      <Connection list={list} onShowModal={handleShowModal} onSetConnectionId={handleSetConnectionId}/>
+      // <Connection list={list} onShowModal={handleShowModal} onSetConnectionId={handleSetConnectionId}/>
+      <Connection list={list} onShowModal={handleShowModal} />
     );
   }
 }

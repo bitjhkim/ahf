@@ -1,9 +1,5 @@
 import React from 'react';
-// import styles from './Footer.scss';
-import classNames from 'classnames/bind';
 import { NavLink, withRouter } from 'react-router-dom';
-
-// const cx = classNames.bind(styles);
 
 const Nav = () => (
   <nav className="col-md-2 d-none d-md-block bg-light sidebar">

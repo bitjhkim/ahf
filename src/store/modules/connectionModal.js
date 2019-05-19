@@ -37,11 +37,13 @@ const initialState = Map({
 export default handleActions({
     [INITIALIZE]: (state, action) => initialState,
     [CHANGE_INPUT]: (state, action) => {
-        const { name, value } = action.payload;
-        return state.set(name, value);
+      const { name, value } = action.payload;
+      return state.set(name, value);
     },
     [SHOW_MODAL]: (state, action) => {
-        return state.set('visible', true);
+      const { id } = action.payload;
+      return state.set('id', id)
+                  .set('visible', true);
     },
     [HIDE_MODAL]: (state, action) => {
         return state.set('visible', false);
@@ -57,6 +59,7 @@ export default handleActions({
         type: GET_CONNECTION_DETAIL,
         onSuccess: (state, action) => {
           const { id, ip, schema, description } = action.payload.data;
+          // console.log('>>>>>>', id, ip, schema, description)
           return state.set('id', id)
                       .set('ip', ip)
                       .set('schema', schema)

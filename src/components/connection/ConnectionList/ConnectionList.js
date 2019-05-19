@@ -4,15 +4,16 @@ import { Col, Card, CardHeader, CardText, CardBody,
 
 
 class ConnectnionList extends Component {
-  constructor (props) {
-    super(props);
-  }
+  // constructor (props) {
+  //   super(props);
+  // }
 
   handleShowModal = (e) => {
-    const { onSetConnectionId, onShowModal } = this.props;
+    // const { onSetConnectionId, onShowModal } = this.props;
+    const { onShowModal } = this.props;
     const { name } = e.target;
-    onSetConnectionId(name);
-    onShowModal();
+    // onSetConnectionId(name);
+    onShowModal({id : name});
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -56,11 +57,11 @@ class ConnectnionList extends Component {
     // );
 
     const connectionList = mlist.map(
-      list => (
-        <div className="card-deck mb-3 text-center">
+      (list, ln) => (
+        <div className="card-deck mb-3 text-center" key={ln}>
           {list.map(
-            connection => 
-            <Col xl="4" lg="4" md="4">
+            (connection, cn) => 
+            <Col xl="4" lg="4" md="4" key={cn}>
               <Card>
                 <CardHeader>
                 {connection.get('name')}
@@ -81,8 +82,8 @@ class ConnectnionList extends Component {
 
     return (
       <div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Connection</h1>
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 className="h2">Connection</h1>
         </div>
         {connectionList}
       </div>

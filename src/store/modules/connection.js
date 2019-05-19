@@ -26,8 +26,8 @@ export default handleActions({
                 const newobj = Object.keys(list[0]).reduce((aac, cur) => {
                     aac[cur] = undefined;
                     return aac
-                  }, {});
-                  list.push(newobj);
+                }, {});
+                list.push(newobj);
             }
             return state.set('list', fromJS(list));
         }
