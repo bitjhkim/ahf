@@ -5,7 +5,7 @@ const App = () => {
   return (
     <Switch>
       <Route exact path="/" component={ConnectionPage}/>
-      <Route path="/schema" component={SchemaPage}/>
+      <Route path="/schema/:connectionName" component={SchemaPage}/>
       <Route path="/model" component={ModelPage}/>
     </Switch>
   );

@@ -1,73 +1,127 @@
 import React, { Component } from 'react';
-// import classNameNames from 'classNamenames/bind';
+import * as d3 from "d3";
 
+// const data = [12, 5, 6, 6, 9, 10];
 
 class ModelManager extends Component {
+
+  componentDidMount() {
+    this.drawChart();
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     // return this.props.todos !== nextProps.todos;
-  }  
+  } 
 
-  render() {
-    const { list } = this.props;
-    const connectionList = list.map(
-      connection => (
-        <div className="card-deck mb-3 text-center">
-          <div className="card mb-4 box-shadow">
-            <div className="card-header">
-              <h4 className="my-0 font-weight-normal">Free</h4>
-            </div>
-            <div className="card-body">
-              <h1 className="card-title pricing-card-title">{connection.get('type')}</h1>
-              <ul className="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" className="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
-            </div>
-          </div>
-          <div className="card mb-4 box-shadow">
-            <div className="card-header">
-              <h4 className="my-0 font-weight-normal">Pro</h4>
-            </div>
-            <div className="card-body">
-              <h1 className="card-title pricing-card-title">$15 <small className="text-muted">/ mo</small></h1>
-              <ul className="list-unstyled mt-3 mb-4">
-                <li>20 users included</li>
-                <li>10 GB of storage</li>
-                <li>Priority email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" className="btn btn-lg btn-block btn-primary">Get started</button>
-            </div>
-          </div>
-          <div className="card mb-4 box-shadow">
-            <div className="card-header">
-              <h4 className="my-0 font-weight-normal">Enterprise</h4>
-            </div>
-            <div className="card-body">
-              <h1 className="card-title pricing-card-title">$29 <small className="text-muted">/ mo</small></h1>
-              <ul className="list-unstyled mt-3 mb-4">
-                <li>30 users included</li>
-                <li>15 GB of storage</li>
-                <li>Phone and email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" className="btn btn-lg btn-block btn-primary">Contact us</button>
-            </div>
-          </div>
-        </div>
-      )
-    );
+  dragstarted(d) {
+    d3.select(this).raise().classed('active', true);
+  }
 
+  dragged(d) {
+    console.log(...d);
+    // d[0] = x.invert(d3.event.x);
+    // d[1] = y.invert(d3.event.y);
+    // d3.select(this)
+    //     .attr('cx', x(d[0]))
+    //     .attr('cy', y(d[1]))
+    // focus.select('path').attr('d', line);
+  }
+
+  dragended(d) {
+    d3.select(this).classed('active', false);
+  }
+
+
+  drawChart() {
+    // const data = [12, 5, 6, 6, 9, 10];
+    // const svg = d3.select("#d3_modelChart").append("svg").attr("width", 700).attr("height", 300);
+
+    // svg.selectAll("rect")
+    //   .data(data)
+    //   .enter()
+    //   .append("rect")
+    //   .attr("x", (d, i) => i * 70)
+    //   .attr("y", (d, i) => 0)
+    //   .attr("width", 65)
+    //   .attr("height", (d, i) => d * 10)
+    //   .attr("fill", "green")
+
+
+    let svg =  d3.select("#d3_modelChart").append("svg");
+    let margin = {top: 20, right: 20, bottom: 30, left: 50};
+    let width = 500 - margin.left - margin.right;
+    let height = 350 - margin.top - margin.bottom;
+
+
+    let points = d3.range(1, 10).map(function(i) {
+      return [i * width / 10, 50 + Math.random() * (height - 100)];
+    });
+
+    let x = d3.scaleLinear().rangeRound([0, width]);
+    let y = d3.scaleLinear().rangeRound([height, 0]);
+
+    let xAxis = d3.axisBottom(x);
+    let yAxis = d3.axisLeft(y);
+
+    let line = d3.line()
+      .x(function(d) { return x(d[0]); })
+      .y(function(d) { return y(d[1]); });
+      
+    let drag = d3.drag()
+      .on('start', this.dragstarted)
+      .on('drag', this.dragged(x, y, focus, line))
+      .on('end', this.dragended);
+    
+        
+    svg.append('rect')
+      .attr('class', 'zoom')
+      .attr('cursor', 'move')
+      .attr('fill', 'none')
+      .attr('pointer-events', 'all')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+  var focus = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  x.domain(d3.extent(points, function(d) { return d[0]; }));
+  y.domain(d3.extent(points, function(d) { return d[1]; }));
+
+  focus.append("path")
+    .datum(points)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+    .attr("d", line);
+
+  focus.selectAll('circle')
+    .data(points)
+    .enter()
+    .append('circle')
+    .attr('r', 5.0)
+    .attr('cx', function(d) { return x(d[0]);  })
+    .attr('cy', function(d) { return y(d[1]); })
+    .style('cursor', 'pointer')
+    .style('fill', 'steelblue');
+
+  focus.selectAll('circle')
+    .call(drag);
+
+  focus.append('g')
+    .attr('class', 'axis axis--x')
+    .attr('transform', 'translate(0,' + height + ')')
+    .call(xAxis);
+    
+  focus.append('g')
+    .attr('class', 'axis axis--y')
+    .call(yAxis);
+}
+
+render() {
     return (
-      <div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Model</h1>
-        </div>
-        {connectionList}
-      </div>
+      <div id="d3_modelChart"></div>
     );
   }
 }

@@ -3,7 +3,7 @@ import Schema from 'components/schema/SchemaList';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class SchemaContainer extends Component {
+class SchemaPaneContainer extends Component {
 
   render() {
     const { list } = this.props;
@@ -16,6 +16,6 @@ class SchemaContainer extends Component {
 
 export default connect(
   (state) => ({
-    list: state.schema
+    list: state.schema.get('list')
   })
-)(SchemaContainer);
+)(SchemaPaneContainer);

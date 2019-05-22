@@ -1,15 +1,22 @@
-<!DOCTYPE html>
 <html>
-
-  <head>
-    <!-- <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
-    <link href="css/main.css" type="text/css" rel="stylesheet"/> -->
-  </head>
-
-  <body>
-    <div id="content" class="container"></div>
-    <script src="js/bundle.js"></script>
-  </body>
-
+<header>
+<title>AgensHub</title>
+</header>
+<body>
+<h1><div id="version"></div></h1>
+</body>
+<script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "/API/Version", true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+        var status = xhr.status;
+        if (status === 200) {
+            document.getElementById("version").innerHTML = "AgensHub " + xhr.response.Version + " (" + xhr.response.Revision + ")";
+        } else {
+            document.getElementById("version").innerHTML = "AgensHub Unknown";
+        }
+    };
+    xhr.send();
+</script>
 </html>
-
